@@ -1,0 +1,8 @@
+Docker run -it -d node -> make the input and terminal available, for future attachments using -a 
+Keeps the container running even if the user is not in the terminal
+
+Docker exec container name -> to execute a command inside that container
+
+Docker exec -it container name bash -> to get the bash of the container
+
+Docker run -it node npm init -> overrides the default command when running the container for the first time

@@ -1,0 +1,95 @@
+
+# ? yaml uses indentation
+
+# ? by default when docker compose is stopped by using down -> it removes the containers
+services:
+  # ? the name of the services are up to the user
+  # ! this name will be the used calling to services from inside the code
+  # ! but when listing the name of this folder-serviceName-1
+  mongodb:
+    # ? image referenced as string
+    image: 'mongo'
+    container_name: mongodb
+    volumes: 
+      # ? named volume 
+      - data:/data/db
+    # environment:
+      # ! two ways to declare the variables
+      # ! first one
+      # - MONGO_INITDB_ROOT_USERNAME=max
+      # ! second one
+      # MONGO_INITDB_ROOT_USERNAME: levi
+      # MONGO_INITDB_ROOT_PASSWORD: secret
+      # ? using an env file
+    # env_file:
+    #   - ./env/mongo.env
+    # ? a default network is created for these services.
+    # ? but you can still create a network and select it this way
+    networks:
+      - goals-net
+  backend:
+    # ! build: requires a Docker file route to create the image from there
+    # ! no need to add dockerfile
+    build: ./backend
+    # ! long way, if you don't use dockerfile name for docker
+    # build:
+      # ? context is the folder where the dockerfile is placed
+      # ? but also where the data is coming from the local machine to container
+      # context: ./backend
+      # dockerfile: dockerfile-dev
+      # args:
+    container_name: backend
+    ports:
+      - '80:80'
+      # - '40:40' -> more ports here
+    volumes:
+      - logs:/app/logs
+      # ? bind mount -> they don't need an absolute path
+      # ! just a relative path and then the folder in the container where you want to save it
+      # ! you don't need to list it at the end of the file
+      - ./backend:/app
+      # ? anonymous volumes -> no need to be listed at the end
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    networks:
+      - goals-net
+    # ? depend_on -> to indicate a container depends on another one 
+    depends_on:
+      - mongodb
+      # ? - more services...
+
+  frontend:
+    # ! the building of an image is done only if the image doesn't exist.
+    build: ./frontend
+    container_name: frontend
+    ports: 
+      - '3000:3000'
+    volumes:
+      # ? bind mount
+      - ./frontend/src:/app/src
+    # ? to let the input output open
+    stdin_open: true
+    # ? to have a terminal running
+    tty: true    
+    depends_on:
+      - backend
+
+# ? all the named volumes used in the services should be listed here too
+# ? if different services use the same name for volume, it'll be shared
+# ! no need to list bind mounts or anonymous volumes here
+volumes:
+  data: 
+  logs:
+
+# ? all networks used by the services, should be listed here
+networks:
+  goals-net:
+    driver: bridge
+
+# ! docker compose up -> initialize docker compose yaml
+# ! docker compose up -d -> to start in detach mode
+# ! docker compose down -> deletes all containers and the networks created (but doesn't delete volumes though)
+# ! docker compose down -v -> deletes containers, network and volumes
+
+# ! docker compose up --build -> forces images rebuilding: only images with build command in this file

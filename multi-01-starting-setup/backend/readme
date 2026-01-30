@@ -1,0 +1,3 @@
+
+For Mongo DB
+[x] docker run --name mongodb --rm -d mongo

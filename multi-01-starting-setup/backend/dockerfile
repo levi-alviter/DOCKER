@@ -1,0 +1,20 @@
+FROM node
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN npm install
+
+COPY . /app
+
+ENV PORT=80
+
+EXPOSE $PORT
+
+# ENV MONGODB_USERNAME=root
+# ENV MONGODB_PASSWORD=secret
+
+CMD ["node", "app.js"]
+
+# ? docker run --rm -d --name mongodb --network mern-net -v data:/data/db -e MONGO_INITDB_ROOT_USERNAME=alars -e MONGO_INITDB_ROOT_PASSWORD=secret  mongo

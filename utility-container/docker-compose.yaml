@@ -1,0 +1,11 @@
+services:
+  npm: 
+    build: ./
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+
+# ? docker compose run -> allows us to run a command using the service name
+# ? docker compose run npm init -> runs npm init
+# ? docker compose run --rm npm init -> --rm to remove the container after execution is finished

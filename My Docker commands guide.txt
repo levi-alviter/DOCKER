@@ -1,0 +1,100 @@
+My Docker commands guide
+
+Docker run image-id -> Create and run container
+
+Docker ps -> list containers
+
+Docker images -> list images
+
+Docker run -it imageTag -> 
+	-i Keep STDIN open even if not attached
+	-t Allocate a pseudo-TTY (Create a virtual terminal device inside the container so programs think they’re running in a real terminal)
+
+-i -> attach the terminal even if not indicated
+-t -> makes the container have a virtual terminal that is connected to our current terminal
+
+Docker start -a container-id -> attach 
+Docker start -ai container-id -> attach and being able to input in the terminal 
+
+
+You can't remove a running container
+
+docker ps -a -> list all the containers not only the ones running
+
+docker rm container_name/id container_name/id -> remove a single or several containers at a time
+
+docker container prune -> remove all stopped containers at once
+
+docker rmi image-id -> remove image
+
+You can remove images if they're not used by any container anymore, that includes stopped containers
+
+docker image prune -> remove all unused images
+
+docker run --rm -> Automatically remove the container when it exits
+
+docker run -p localPort:containerPort imageId -> running the container and publishing the port and connecting it with another port in our machine
+
+docker run -d imageId -> créate the container and run it in detach mode
+
+docker image inspect imageId -> json with info about the image
+
+docker cp (file or dir you want to copy) containerName:(url you want to put the info) -> copy files or dirs inside a running container
+
+example: docker cp  dummy/. 943e634825fa:/test
+
+docker cp dockerName:(url of the file or dir to copy) (dir you want to put the info) -> copy files or dirs from a container into our local machine
+
+example docker cp 943e634825fa:/test dummy
+
+docker exec -it container-id/name /bin/bash -> Access the bash of the running container
+
+docker run --name yourOwnName image-id -> add a name to your container
+
+images naming -> repository:tag
+repository: group of posible more specialized images example node
+tag: defines a specialized image within a group of images
+
+for instance node:14 -> node image in its versión 14
+
+docker build -t goals:1 . -> add a tag and repository to the container
+
+docker tag old-name new-name -> renaming an image by creating a clone of the image with the new name 
+
+docker login -> login into docker hub
+docker logout -> logout docker hub
+
+docker pull profile/image-name -> pull remote image, by default pulls the latest versión
+
+docker run profile/image-name -> if image is not found locally, it'll go and look for it remotelly -> always takes the latest versión be careful if you need a previous versión
+
+------------------------------------------------------------------------
+
+docker volumen ls -> list volumes
+
+docker run (dir-name locally):(dir-name container) image-name/id -> runs a container with a name volumen
+docker run feedback:/app/feedback volumepractice:v8
+
+docker volume rm VOL_NAME -> delete volumen
+docker volume prune -> delete all unused volumes
+
+docker run -v "(absolute path):(container path)" -> running the container with bind mounts
+docker run -v "C:\Users\Lenovo\Desktop\DOCKER\data-volumes-01-starting-setup:/app"
+shortcut 
+docker run -v "%cd%":/app -> for Windows it gets the path automatically
+docker run -v -v $(pwd):/app -> for MacOS or Linux
+
+docker run -v /app/node_modules
+
+docker run -d -p 80:80 -v "%cd%":/app -v feedback:/app/feedback -v /app/node_modules --name volumeApp11 volumepractice:v8
+
+docker logs container-name/id -> list all the past logs 
+
+----------------------
+v (internal-path):ro -> to make volumes read only
+
+docker volumen créate volume-name -> creates a volumen
+docker run -v previously-created-volume-name -> using the just created volumen
+
+docker inspect volumen-name/id -> get additional information of a volume
+docker rm volume-name/id -> remove a volune

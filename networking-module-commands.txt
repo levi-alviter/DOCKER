@@ -1,0 +1,7 @@
+docker container inspect container-name -> fetch container info
+
+docker network create network-name -> create a new Docker network
+
+docker network ls -> list docker networks
+
+docker run --network my-custom-network my-image -> running image adding it a network

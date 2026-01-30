@@ -1,0 +1,19 @@
+docker volumen ls -> list volumes
+
+docker run (dir-name locally):(dir-name container) image-name/id -> runs a container with a name volumen
+docker run feedback:/app/feedback volumepractice:v8
+
+docker volume rm VOL_NAME -> delete volumen
+docker volume prune -> delete all unused volumes
+
+docker run -v "(absolute path):(container path)" -> running the container with bind mounts
+docker run -v "C:\Users\Lenovo\Desktop\DOCKER\data-volumes-01-starting-setup:/app"
+shortcut 
+docker run -v "%cd%":/app -> for Windows it gets the path automatically
+docker run -v -v $(pwd):/app -> for MacOS or Linux
+
+docker run -v /app/node_modules
+
+docker run -d -p 80:80 -v "%cd%":/app -v feedback:/app/feedback -v /app/node_modules --name volumeApp11 volumepractice:v8
+
+docker logs container-name/id -> list all the past logs 
