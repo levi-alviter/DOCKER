@@ -13,6 +13,7 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 >> -d Run container in background and print container ID  
 >> --rm Automatically remove the container and its associated anonymous volumes when it exits  
 >> --name string Assign a name to the container  
+>> --network network Connect a container to a network 
 >> -v Mount a volume  
 >> [EXISTING_NAMED_VOLUME] -> Reuse a volume
 >>> [CONTAINER_TARGET_PATH] -> anonymous volume  
@@ -69,11 +70,15 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 > Authenticate to a registry  
 > Defaults to Docker Hub if no server is speficied  
 
+# Docker Registry  
+
 > `docker logout`  
 > Logout form a registry  
 
 > `docker pull [OPTIONS] name[:TAG]`  
 > Download an image from a registry  
+
+# Docker Volume  
 
 > `docker volume ls [OPTIONS]`  
 > List volumes  
@@ -94,3 +99,15 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 > `docker volume rm [OPTIONS] [VOLUME] [VOLUME...]`  
 > Remove one or more volumes. You cannot a volume that is in use by a container  
 >> -f Force the removal of one or more volumes  
+
+# Docker Networks  
+
+> `docker network create [OPTIONS] [NETWORK]`  
+> Create a network  
+
+> `docker network rm [NETWORK] [NETWORK...]`  
+> Remove one or more networks  
+
+> `docker network prune [OPTIONS]`  
+> Remove all unused networks  
+> -f Do not prompt for confirmation  
