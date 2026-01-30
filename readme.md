@@ -4,12 +4,13 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 
 ### Foundation commands
 
-> *docker run [OPTIONS] [IMAGE-ID | IMAGE-NAME]*
+> **docker run [OPTIONS] [IMAGE-ID | IMAGE-NAME]**
 > - Create and run a new container
 > - Options:  
 >> - -i Keep STDIN open even if not attached
 >> - -t Allocate a pseudo-TTY  
-> *docker ps* 
+
+> **docker ps**
 > - List containers
 > docker start [OPTIONS] [IMAGE-ID | IMAGE-NAME]
 > - Start one or more stopped containers
