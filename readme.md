@@ -111,3 +111,53 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 > `docker network prune [OPTIONS]`  
 > Remove all unused networks  
 > -f Do not prompt for confirmation  
+
+# Docker Compose  
+
+> **services**  
+> The definition of a new container  
+
+> **image**  
+> Image used to build the container 
+
+> **context**  
+> Specifies the directory or URL that is sent to the Docker daemon as the source for building an image  
+> Docker will not be aware of any parent folder of the indicated context  
+
+> **dockerfile**  
+> Path to the docker file used to build the container (used along with context)
+
+> **build**  
+> Path to the docker file used to build the container
+
+> **ports**  
+> Ports published to the host machine  
+
+> **container_name**  
+> Container's name definition  
+
+> **volumes**  
+> Volume's definition (anonymous, named and bind mount)  
+> ALl volumes need to be listed at the end of the docker file  
+> If two containers have the same name in containers, it'll be a shared volume  
+
+> **environment**  
+> VAR = 1  
+> Definition of variables inline  
+
+> **env_file**  
+> Definition of variables with an env file  
+
+> **entrypoint**  
+> Overwrite or create entrypoint in a docker file
+
+> **networks**  
+> Creationd and/or connection to network  
+> All networks need to be listed at the end of the docker file   
+
+> **depends_on**  
+> Used for synchronisation of the containers' creation  
+
+> **stdin_open** and **tty**  
+> Aimed to allow to access and interact with the container through the terminal
+
