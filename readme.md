@@ -14,9 +14,13 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 >> --rm Automatically remove the container and its associated anonymous volumes when it exits  
 >> --name string Assign a name to the container  
 >> -v Mount a volume  
+>> [EXISTING_NAMED_VOLUME] -> Reuse a volume
 >>> [CONTAINER_TARGET_PATH] -> anonymous volume  
 >>> [VOLUME_NAME]:[CONTAINER_TARGET_PATH] -> named volume  
->>> [HOST_SOURCE_PATH]:[CONTAINER_TARGET_PATH] -> bind mount  
+>>> [HOST_ABSOLUTE_SOURCE_PATH]:[CONTAINER_TARGET_PATH] -> bind mount    
+>>> %cd% -> Windows command to extract current path    
+>>> $(pwd) -> Linux command to extract current path  
+>>> [CONTAINER_TARGET_PATH]:ro -> turn volume only readonly
 
 > **docker ps [OPTIONS]**  
 > List containers  
@@ -56,6 +60,7 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 > Execute a command in a running container  
 >> -i Keep STDIN open even if not attached  
 >> -t Allocate a pseudo-TTY  
+>> bash | sh different terminals you can connect to
 
 > **docker tag [SOURCE_IMAGE][:TAG] [TARGET_IMAGE][:TAG]**  
 > Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE  
@@ -79,3 +84,13 @@ Repo with all the foundational knowledge of Docker and docker compose good pract
 > **docker volume prune [OPTIONS]**  
 > Remove unused local volumes  
 >> -f Do not prompt for confirmation  
+
+> **docker logs [OPTIONS] [CONTAINER]**
+> Fetch the logs of a container  
+
+> **docker inspect [VOLUME]**  
+> Get additional information of a volume  
+
+> **docker volume rm [OPTIONS] [VOLUME] [VOLUME...]**  
+> Remove one or more volumes. You cannot a volume that is in use by a container  
+>> -f Force the removal of one or more volumes  
